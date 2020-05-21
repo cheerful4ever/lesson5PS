@@ -44,8 +44,8 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == this.requestCode && resultCode == RESULT_OK) {
-            DBHelper dbHelper = new DBHelper(MainActivity.this);
+        if (requestCode == 9 && resultCode == RESULT_OK) {
+            DBHelper dbHelper = new DBHelper(SecondActivity.this);
             songs.clear();
             songs.addAll(dbHelper.getAllSongs());
             aa.notifyDataSetChanged();
