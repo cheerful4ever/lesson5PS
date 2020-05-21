@@ -56,16 +56,15 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public boolean isExistingSong(String content) {
-        String selectQuery = "SELECT " + COLUMN_NOTE_CONTENT + " FROM "
-                + TABLE_SONG + " WHERE " + COLUMN_NOTE_CONTENT + " = '"
-                + content + "'";
+    public boolean isExistingSong(String title) {
+        String selectQuery = "SELECT " + COLUMN_TITLE + " FROM "
+                + TABLE_SONG + " WHERE " + COLUMN_TITLE + " = '"
+                + title + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             return true;
         }
-        // Close connection
         cursor.close();
         db.close();
 
@@ -102,8 +101,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList<String> getSongContent() {
         ArrayList<String> notes = new ArrayList<String>();
-        String selectQuery = "SELECT " + COLUMN_SONG_CONTENT + " FROM "
-                + TABLE_SONG;
+        String selectQuery = "SELECT " + COLUMN_TITLE + ","
+                + COLUMN_SINGER + ","
+                + COLUMN_YEAR + ","
+                + COLUMN_STARS
+                + " FROM " + TABLE_SONG;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
