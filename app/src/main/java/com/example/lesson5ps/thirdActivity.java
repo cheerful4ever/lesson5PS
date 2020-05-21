@@ -54,8 +54,8 @@ public class thirdActivity extends AppCompatActivity {
             public void onClick(View view) {
                 song.setTitle(etSongTitle.getText().toString()),
                 song.setSingers(etSingerName.getText().toString()),
-                song.setYear(etYear.getText().toString()),
-                song.setStars(getStars()),
+                song.setYear(Integer.parseInt(etYear.getText().toString())),
+                song.setStars(song.getStars()),
 
                 DBHelper dbh = new DBHelper(UpdateActivity.this);
                 dbh.updateNote(song);

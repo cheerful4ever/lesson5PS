@@ -16,6 +16,7 @@ public class SecondActivity extends AppCompatActivity {
     ListView lv;
     SongArrayAdapter adapter;
     Button btnShowStars;
+    ArrayList<Song> songs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class SecondActivity extends AppCompatActivity {
         btnShowStars = (Button) this.findViewById(R.id.btnShow5Stars);
 
         DBHelper dbh = new DBHelper(this);
-        ArrayList<Song> songs = dbh.getAllSongs();
+        songs = dbh.getAllSongs();
 
         adapter = new SongArrayAdapter(this, R.layout.row, songs);
         lv.setAdapter(adapter);
@@ -34,12 +35,8 @@ public class SecondActivity extends AppCompatActivity {
         btnShowStars.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DBHelper dbh = new DBHelper(this);
-                songs = dbh.getAllSongs();
+                DBHelper dbh = new DBHelper(SecondActivity.this);
                 songs = dbh.getAllSongsByStars(5);
-
-                ArrayAdapter<Song> adapter = new ArrayAdapter<Song>(this, android.R.layout.activity_list_item, songs);
-                lv.setAdapter(adapter);
             }
         });
     }
