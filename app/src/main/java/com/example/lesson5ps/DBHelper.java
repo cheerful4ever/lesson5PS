@@ -29,13 +29,13 @@ public class DBHelper extends SQLiteOpenHelper {
         // CREATE TABLE Note
         // (id INTEGER PRIMARY KEY AUTOINCREMENT, note_content TEXT, rating
         // INTEGER );
-        String createNoteTableSql = "CREATE TABLE " + TABLE_SONG + "("
+        String createSongTableSql = "CREATE TABLE " + TABLE_SONG + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_TITLE + " TEXT, "
                 + COLUMN_SINGER + " TEXT, "
                 + COLUMN_YEAR + " INTEGER, "
                 + COLUMN_STARS + " INTEGER )";
-        db.execSQL(createNoteTableSql);
+        db.execSQL(createSongTableSql);
         Log.i("info", "created tables");
     }
 
