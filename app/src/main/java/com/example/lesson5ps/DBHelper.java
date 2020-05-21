@@ -57,15 +57,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public boolean isExistingSong(String content) {
-        // Select all the notes' content
         String selectQuery = "SELECT " + COLUMN_NOTE_CONTENT + " FROM "
                 + TABLE_SONG + " WHERE " + COLUMN_NOTE_CONTENT + " = '"
                 + content + "'";
-        // Get the instance of database to read
         SQLiteDatabase db = this.getReadableDatabase();
-        // Run the SQL query and get back the Cursor object
         Cursor cursor = db.rawQuery(selectQuery, null);
-        // moveToFirst() moves to first row
         if (cursor.moveToFirst()) {
             return true;
         }
@@ -78,7 +74,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList<Song> getAllSongs() {
         ArrayList<Song> notes = new ArrayList<Song>();
-        // "SELECT id, note_content, stars FROM note"
         String selectQuery = "SELECT " + COLUMN_ID + ","
                 + COLUMN_TITLE + ","
                 + COLUMN_SINGER + ","
@@ -88,7 +83,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        // Loop through all rows and add to ArrayList
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(0);
@@ -101,35 +95,23 @@ public class DBHelper extends SQLiteOpenHelper {
                 notes.add(songs);
             } while (cursor.moveToNext());
         }
-        // Close connection
         cursor.close();
         db.close();
         return notes;
     }
 
     public ArrayList<String> getSongContent() {
-        //TODO return records in Strings
-
-        // Create an ArrayList that holds String objects
         ArrayList<String> notes = new ArrayList<String>();
-        // Select all the notes' content
         String selectQuery = "SELECT " + COLUMN_SONG_CONTENT + " FROM "
                 + TABLE_SONG;
 
-        // Get the instance of database to read
         SQLiteDatabase db = this.getReadableDatabase();
-        // Run the SQL query and get back the Cursor object
         Cursor cursor = db.rawQuery(selectQuery, null);
-        // moveToFirst() moves to first row
         if (cursor.moveToFirst()) {
-            // Loop while moveToNext() points to next row and returns true;
-            // moveToNext() returns false when no more next row to move to
             do {
-                // Add the note content to the ArrayList object
                 notes.add(cursor.getString(0));
             } while (cursor.moveToNext());
         }
-        // Close connection
         cursor.close();
         db.close();
 
