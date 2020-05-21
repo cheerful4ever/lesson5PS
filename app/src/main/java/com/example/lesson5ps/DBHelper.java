@@ -100,7 +100,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<String> getSongContent() {
-        ArrayList<String> notes = new ArrayList<String>();
+        ArrayList<String> songs = new ArrayList<String>();
         String selectQuery = "SELECT " + COLUMN_TITLE + ","
                 + COLUMN_SINGER + ","
                 + COLUMN_YEAR + ","
@@ -111,12 +111,12 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                notes.add(cursor.getString(0));
+                songs.add(cursor.getString(0));
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
 
-        return notes;
+        return songs;
     }
 }
