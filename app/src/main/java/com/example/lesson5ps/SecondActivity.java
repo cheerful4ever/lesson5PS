@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,6 +30,17 @@ public class SecondActivity extends AppCompatActivity {
 
         adapter = new SongArrayAdapter(this, R.layout.row, songs);
         lv.setAdapter(adapter);
-        
+
+        btnShowStars.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DBHelper dbh = new DBHelper(this);
+                songs = dbh.getAllSongs();
+                songs = dbh.getAllSongsByStars(5);
+
+                ArrayAdapter<Song> adapter = new ArrayAdapter<Song>(this, android.R.layout.activity_list_item, songs);
+                lv.setAdapter(adapter);
+            }
+        });
     }
 }
