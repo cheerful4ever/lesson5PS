@@ -2,6 +2,7 @@ package com.example.lesson5ps;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ public class SecondActivity extends AppCompatActivity {
     SongArrayAdapter adapter;
     Button btnShowStars;
     ArrayList<Song> songs;
+    ArrayAdapter aa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +41,16 @@ public class SecondActivity extends AppCompatActivity {
                 songs = dbh.getAllSongsByStars(5);
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == this.requestCode && resultCode == RESULT_OK) {
+            DBHelper dbHelper = new DBHelper(MainActivity.this);
+            songs.clear();
+            songs.addAll(dbHelper.getAllSongs());
+            aa.notifyDataSetChanged();
+            dbHelper.close();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

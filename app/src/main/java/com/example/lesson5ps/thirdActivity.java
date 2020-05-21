@@ -57,8 +57,8 @@ public class thirdActivity extends AppCompatActivity {
                 song.setYear(Integer.parseInt(etYear.getText().toString())),
                 song.setStars(song.getStars()),
 
-                DBHelper dbh = new DBHelper(UpdateActivity.this);
-                dbh.updateNote(song);
+                DBHelper dbhelper = new DBHelper(UpdateActivity.this);
+                dbhelper.updateNote(song);
                 setResult(RESULT_OK);
                 finish();
             }
@@ -68,6 +68,18 @@ public class thirdActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbh = new DBHelper(thirdActivity.this);
+                dbh.deleteSong(song.get_id());
+                dbh.close();
+                Intent returnIntent = new Intent();
+                setResult(RESULT_OK, returnIntent);
                 finish();
             }
         });
