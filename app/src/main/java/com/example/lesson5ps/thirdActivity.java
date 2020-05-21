@@ -15,6 +15,7 @@ public class thirdActivity extends AppCompatActivity {
     RadioGroup rg;
     RadioButton rb1, rb2, rb3, rb4, rb5;
     Button btnUpdate, btnCancel, btnDelete;
+    Song song;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +28,12 @@ public class thirdActivity extends AppCompatActivity {
         btnDelete = (Button) findViewById(R.id.btnDelete);
 
         Intent i = getIntent();
-        songs = (Song).i.getSerializableExtra("song");
-        etId.setText(String.valueOf(song.getId()));
+        song = (Song).i.getSerializableExtra("song");
+        etId.setText(String.valueOf(song.get_id()));
         etSongTitle.setText(song.getTitle());
         etSingerName.setText(song.getYear());
 
-        int stars = songs.getStars();
+        int stars = song.getStars();
         if (stars == 1) {
             rb1.setChecked(true);
         }
